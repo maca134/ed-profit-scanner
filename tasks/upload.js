@@ -46,7 +46,7 @@ module.exports = function (paths) {
 			},
 			function (response, next) {
 				var release = response.data;
-				async.waterfall([
+				async.parallel([
 					function (next) {
 						console.log('git release uploading update');
 						github.repos.uploadAsset({
