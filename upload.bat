@@ -1,1 +1,1 @@
-gulp upload
+gulp upload --env=production

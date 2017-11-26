@@ -6,7 +6,7 @@ module.exports = function (paths) {
 		return paths.srcDir.readAsync('package.json', 'json').then(function (manifest) {
 			switch (env) {
 				case 'production':
-					manifest.window.toolbar = false;
+					//manifest.window.toolbar = false;
 				break;
 				case 'development':
 					manifest.name += '-dev';
