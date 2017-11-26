@@ -75,6 +75,7 @@ module.exports = function (paths) {
 					owner: 'maca134',
 					repo: 'ed-profit-scanner',
 					id: release.id,
+                    tag_name: manifest.version,
 					draft: false
 				}, e => next(e));
 			}

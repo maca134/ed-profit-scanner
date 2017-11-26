@@ -121,63 +121,69 @@ module.exports = function (paths) {
 				], next);
 			},
 			function (next) {
-				console.log('Zipping release');
-				gulp.src(readyAppDir.path('**/*')).pipe(zip(manifest.name + '-' + manifest.version + '_update.zip')).pipe(gulp.dest(paths.releasesDir.path())).on('end', function () {
-					next();
-				});
-			},
-			function (next) {
-				console.log('Creating installer');
-				var innoFile = [];
-			    innoFile.push('#define MyAppVersion "' + manifest.version + '"');
-			    innoFile.push('#define MyAppExeName "' + manifest.name + '.exe"');
-			    innoFile.push('#define OutputDir "' + paths.releasesDir.path() + '"');
-			    innoFile.push('#define SetupName "' + (manifest.name + '-' + manifest.version) + '_installer"');
-			    innoFile.push('#define SourcePath "' + readyAppDir.path() + '"');
-			    innoFile.push('#define MyAppURL "http://edps.maca134.co.uk/"');
-			    innoFile.push('#define MyAppName "' + manifest.name + '"');
-			    innoFile.push('#define MyAppProductName "' + manifest.productName + '"');
-			    innoFile.push('#define MyAppPublisher "maca134"');
-
-			    innoFile.push('[Setup]');
-			    innoFile.push('AppId={{' + crypto.createHash('md5').update(manifest.name).digest('hex') + '}');
-			    innoFile.push('AppName={#MyAppProductName}');
-			    innoFile.push('AppVersion={#MyAppVersion}');
-			    innoFile.push('AppPublisher={#MyAppPublisher}');
-			    innoFile.push('AppPublisherURL={#MyAppURL}');
-			    innoFile.push('AppSupportURL={#MyAppURL}');
-			    innoFile.push('AppUpdatesURL={#MyAppURL}');
-			    innoFile.push('DefaultDirName={userpf}\\{#MyAppName}');
-			    innoFile.push('DefaultGroupName={#MyAppProductName}');
-			    innoFile.push('OutputDir={#OutputDir}');
-			    innoFile.push('OutputBaseFilename={#SetupName}');
-			    innoFile.push('Compression=lzma');
-			    innoFile.push('SolidCompression=yes');
-
-			    innoFile.push('[Languages]');
-			    innoFile.push('Name: "english"; MessagesFile: "compiler:Default.isl"');
-
-			    innoFile.push('[Tasks]');
-			    innoFile.push('Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"');
-
-			    innoFile.push('[Files]');
-			    innoFile.push('Source: "{#SourcePath}\\' + manifest.name + '.exe"; DestDir: "{app}"; Flags: ignoreversion');
-			    innoFile.push('Source: "{#SourcePath}\\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs');
-
-			    innoFile.push('[Icons]');
-			    innoFile.push('Name: "{group}\\{#MyAppProductName}"; Filename: "{app}\\{#MyAppExeName}"');
-			    innoFile.push('Name: "{commondesktop}\\{#MyAppProductName}"; Filename: "{app}\\{#MyAppExeName}"; Tasks: desktopicon');
-				async.waterfall([
+				async.parallel([
 					function (next) {
-						paths.tmpDir.writeAsync('create_installer.iss', innoFile.join('\n')).then(() => next()).catch(e => next(e));
+						console.log('Zipping release');
+						gulp.src(readyAppDir.path('**/*'))
+							.pipe(zip(manifest.name + '-' + manifest.version + '_update.zip'))
+							.pipe(gulp.dest(paths.releasesDir.path()))
+							.on('end', () => next())
+							.on('error', e => next(e));
 					},
 					function (next) {
-						childProcess.exec('"C:\\Program Files (x86)\\Inno Setup 5\\iscc.exe" "' + paths.tmpDir.path('create_installer.iss') + '"', function (err, stdout, stderr) {
-							next(err);
-						});
+						console.log('Creating installer');
+						var innoFile = [];
+					    innoFile.push('#define MyAppVersion "' + manifest.version + '"');
+					    innoFile.push('#define MyAppExeName "' + manifest.name + '.exe"');
+					    innoFile.push('#define OutputDir "' + paths.releasesDir.path() + '"');
+					    innoFile.push('#define SetupName "' + (manifest.name + '-' + manifest.version) + '_installer"');
+					    innoFile.push('#define SourcePath "' + readyAppDir.path() + '"');
+					    innoFile.push('#define MyAppURL "https://github.com/maca134/ed-profit-scanner"');
+					    innoFile.push('#define MyAppName "' + manifest.name + '"');
+					    innoFile.push('#define MyAppProductName "' + manifest.productName + '"');
+					    innoFile.push('#define MyAppPublisher "maca134"');
+
+					    innoFile.push('[Setup]');
+					    innoFile.push('AppId={{' + crypto.createHash('md5').update(manifest.name).digest('hex') + '}');
+					    innoFile.push('AppName={#MyAppProductName}');
+					    innoFile.push('AppVersion={#MyAppVersion}');
+					    innoFile.push('AppPublisher={#MyAppPublisher}');
+					    innoFile.push('AppPublisherURL={#MyAppURL}');
+					    innoFile.push('AppSupportURL={#MyAppURL}');
+					    innoFile.push('AppUpdatesURL={#MyAppURL}');
+					    innoFile.push('DefaultDirName={userpf}\\{#MyAppName}');
+					    innoFile.push('DefaultGroupName={#MyAppProductName}');
+					    innoFile.push('OutputDir={#OutputDir}');
+					    innoFile.push('OutputBaseFilename={#SetupName}');
+					    innoFile.push('Compression=lzma');
+					    innoFile.push('SolidCompression=yes');
+
+					    innoFile.push('[Languages]');
+					    innoFile.push('Name: "english"; MessagesFile: "compiler:Default.isl"');
+
+					    innoFile.push('[Tasks]');
+					    innoFile.push('Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"');
+
+					    innoFile.push('[Files]');
+					    innoFile.push('Source: "{#SourcePath}\\' + manifest.name + '.exe"; DestDir: "{app}"; Flags: ignoreversion');
+					    innoFile.push('Source: "{#SourcePath}\\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs');
+
+					    innoFile.push('[Icons]');
+					    innoFile.push('Name: "{group}\\{#MyAppProductName}"; Filename: "{app}\\{#MyAppExeName}"');
+					    innoFile.push('Name: "{commondesktop}\\{#MyAppProductName}"; Filename: "{app}\\{#MyAppExeName}"; Tasks: desktopicon');
+						async.waterfall([
+							function (next) {
+								paths.tmpDir.writeAsync('create_installer.iss', innoFile.join('\n')).then(() => next()).catch(e => next(e));
+							},
+							function (next) {
+								childProcess.exec('"C:\\Program Files (x86)\\Inno Setup 5\\iscc.exe" "' + paths.tmpDir.path('create_installer.iss') + '"', function (err, stdout, stderr) {
+									next(err);
+								});
+							}
+						], next);
 					}
-				], next);
-			}
+				], e => next(e));
+			},
 		], complete);
 	};
 };
