@@ -55,7 +55,7 @@ module.exports = function (paths) {
 		                    id: release.id,
 		                    filePath: paths.releasesDir.path(manifest.name + '-' + manifest.version + '_update.zip'),
 		                    name: manifest.name + '_update.zip'
-						}, next);
+						}, e => next(e));
 					},
 					function (next) {
 						console.log('git release uploading installer');
