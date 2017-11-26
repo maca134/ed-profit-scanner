@@ -1,3 +1,8 @@
+nw.Window.get().on('new-win-policy', function (frame, url, policy) {
+	policy.ignore();
+	nw.Shell.openExternal(url);
+});
+
 var scannerApp = angular.module('scannerApp', [
     'ngRoute',
     'ui.bootstrap',
