@@ -40,7 +40,7 @@ module.exports = function updater(complete) {
 			return complete();
 		}
 		// do update
-		var updateurl = release.assets.find(a => a.name === 'ED-Profit-Scanner-dev_update.zip');
+		var updateurl = release.assets.find(a => a.name === nw.App.manifest.name + '_update.zip');
 		if (!updateurl) {
 			alert('Unable to find update archive, please update manually!');
 			return complete();
