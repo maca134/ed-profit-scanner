@@ -1,1 +1,1 @@
-gulp release
+gulp release --env=production

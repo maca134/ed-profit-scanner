@@ -40,6 +40,7 @@ module.exports = function (paths) {
                     repo: 'ed-profit-scanner',
                     tag_name: manifest.version,
                     name: manifest.version,
+                    prerelease: true,
                     body: ''
 				}, (e, r) => next(e, r));
 			},

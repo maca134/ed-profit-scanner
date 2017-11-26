@@ -26,8 +26,11 @@ module.exports = function updater(complete) {
 		}
 		if (Array.isArray(release))
 			release = release[0];
+		
+		if (release.assets.length === 0)
+			return complete();
 
-		if (release.tag_name && release[0].tag_name === localversion)
+		if (release.tag_name === localversion)
 			return complete();
 		if (!confirm('There is an update, would you like to download it now?'))
 			return complete();
