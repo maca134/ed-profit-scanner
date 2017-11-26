@@ -41,6 +41,7 @@ module.exports = function (paths) {
                     tag_name: manifest.version,
                     name: manifest.version,
                     prerelease: true,
+                    draft: true,
                     body: ''
 				}, (e, r) => next(e, r));
 			},
@@ -67,8 +68,16 @@ module.exports = function (paths) {
 		                    name: manifest.name + '_installer.exe'
 						}, e => next(e));
 					},
-				], e => next(e));
+				], e => next(e, release));
 			},
+			function (release, next) {
+				github.repos.editRelease({
+					owner: 'maca134',
+					repo: 'ed-profit-scanner',
+					id: release.id,
+					draft: false
+				}, e => next(e));
+			}
 		], complete);
 	};
 };
