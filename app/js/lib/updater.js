@@ -8,7 +8,11 @@ var localversion = nw.App.manifest.version;
 var nwPath = path.dirname(process.argv[0]);
 
 module.exports = function updater(complete) {
-	request('https://api.github.com/repos/maca134/ed-profit-scanner/releases', function (err, res, body) {
+	request('https://api.github.com/repos/maca134/ed-profit-scanner/releases', {
+		headers: {
+			'User-Agent': 'ed-profit-scanner'
+		}
+	}, function (err, res, body) {
 		if (err) {
 			alert('There was an error checking for updates: ' + err);
 			return complete();
