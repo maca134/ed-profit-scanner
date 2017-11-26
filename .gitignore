@@ -1,0 +1,15 @@
+app/node_modules/*
+app/vendor/*
+build/*
+node_modules/*
+old/*
+package-lock.json
+releases/*
+updater/packages/*
+updater/Updater/obj/*
+updater/Updater/bin/*
+updater/.vs/*
+updater/Updater/Updater.csproj.user
+tmp/*
+.hg/*
+.hgignore

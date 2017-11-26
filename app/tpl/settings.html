@@ -1,0 +1,29 @@
+<h3>Settings</h3>
+
+<div class="form-group">
+	<label for="edjpath">Elite:Dangerous Journal Path</label>
+	<input type="text" class="form-control" id="edjpath" placeholder="Elite:Dangerous Journal Path" ng-model="edjpath">
+	<p class="help-block">Elite:Dangerous journal path.</p>
+</div>
+
+<button class="btn btn-default btn-block" ng-disabled="inprogress" ng-click="importEDJournal()">
+	Import Elite: Dangerous Journal
+</button>
+<p class="help-block">Importing journal will grab all your previous body scans and will prevent them appearing.</p>
+
+<form>
+	<div class="form-group">
+		<label for="systemBlacklist">System Blacklist</label>
+		<textarea id="systemBlacklist" class="form-control" rows="5" ng-model="systemBlacklist"></textarea>
+		<p class="help-block">This will stop the systems above from appearing.</p>
+	</div>
+</form>
+
+<p>Scanned Systems: {{scannedSystems}}</p>
+<button class="btn btn-danger btn-block" ng-disabled="inprogress" ng-click="deleteUserData()">
+	Delete User Data
+</button>
+<p class="help-block">This will delete all the saved bodies/systems in the database.</p>
+
+<hr>
+<button class="btn btn-default btn-block" ng-click="save()">Save</button>

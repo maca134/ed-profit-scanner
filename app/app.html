@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="scannerApp">
+	<head>
+	    <meta charset="utf-8">
+	    <title>ED Profit Scanner</title>
+	    <link href="./css/main.css" rel="stylesheet">
+	</head>
+	<body ng-class="{inprogress: inprogress}" ng-controller="MainCtrl as main" ng-cloak>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">EDps</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse" nav-menu="active">
+	                <ul class="nav navbar-nav">
+	                    <li><a href="#!/scanner"><span class="fa fa-globe"></span> Scanner</a></li>
+	                    <li><a href="#!/filters"><i class="fa fa-filter"></i> Filters</a></li>
+	                    <li><a href="#!/settings"><i class="fa fa-cogs"></i> Settings</a></li>
+	                    <li><a href="#!/about"><i class="fa fa-info"></i> About</a></li>
+	                </ul>
+	                <form class="navbar-form navbar-right" ng-submit="$root.currentSystem = systemsearch">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search For System" ng-model="systemsearch">
+						</div>
+					</form>
+				</div>
+				<!--/.navbar-collapse -->
+			</div>
+		</nav>
+		<div id="inprogess" ng-show="inprogress">
+			<div id="inprogess-inner">
+				<i class="fa fa-cog fa-spin fa-fw"></i>
+				{{inprogressStatus || 'Loading'}}
+			</div>
+		</div>
+		<div class="container-fluid main-page" ng-view ng-cloak></div>
+		<script src="./vendor/jquery/dist/jquery.min.js"></script>
+		<script src="./vendor/toastr/toastr.min.js"></script>
+		<script src="./vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+		<script src="./vendor/angular/angular.min.js"></script>
+		<script src="./vendor/angular-bootstrap-slider/slider.js"></script>
+		<script src="./vendor/angular-route/angular-route.min.js"></script>
+		<script src="./vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+		<script src="./vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+		<script src="./js/bootstrap.js"></script>
+	</body>
+</html>

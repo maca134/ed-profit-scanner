@@ -1,0 +1,30 @@
+{
+  "name": "ED-Profit-Scanner",
+  "productName": "ED Profit Scanner",
+  "description": "",
+  "version": "0.0.0",
+  "author": "Matthew McConnell <maca134@googlemail.com>",
+  "main": "app.html",
+  "window": {
+    "icon": "img/icon.png",
+    "show": true,
+    "toolbar": true,
+    "width": 1100,
+    "height": 600,
+    "min_width": 600,
+    "min_height": 600,
+    "position": "center"
+  },
+  "dependencies": {
+    "async": "^2.6.0",
+    "extend": "^3.0.1",
+    "fs-jetpack": "^1.2.0",
+    "request": "^2.83.0",
+    "split": "^1.0.1"
+  },
+  "nwjs": {
+    "version": "0.26.6",
+    "sdk": true,
+    "arch": "x64"
+  }
+}

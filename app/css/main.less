@@ -1,0 +1,59 @@
+@import "includes.less";
+@grid-float-breakpoint: 0;
+
+body {
+  padding: 30px 0;
+  overflow-x: hidden;
+}
+
+body.inprogress {
+	overflow: hidden;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.navbar-form .form-control {
+	height: 35px;
+	margin-top: 3px;
+}
+
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+
+#toast-container {
+	> div {
+		.borderRadius(0);
+	}
+}
+
+#inprogess {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: repeating-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.25),
+		rgba(255, 255, 255, 0.25) 10px,
+		rgba(255, 255, 255, 0.2) 10px,
+		rgba(255, 255, 255, 0.2) 20px
+	);
+	z-index: 99999;
+	#inprogess-inner {
+		margin: 50% auto;
+		width: 50%;
+		text-align: center;
+		padding: 10px;
+		background-color: @body-bg;
+	}
+}
+
+td p {
+	margin-bottom: 0;
+}

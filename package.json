@@ -1,0 +1,22 @@
+{
+  "name": "ed-profit-scanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-jetpack": "^1.2.0",
+    "github": "^12.0.6",
+    "gulp": "^3.9.1",
+    "gulp-include": "^2.3.1",
+    "gulp-less": "^3.3.2",
+    "gulp-zip": "^4.0.0",
+    "nwjs-downloader": "^1.0.0",
+    "winresourcer": "^0.9.0",
+    "yargs": "^10.0.3"
+  }
+}

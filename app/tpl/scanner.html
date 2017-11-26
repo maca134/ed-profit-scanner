@@ -1,0 +1,102 @@
+<h3 class="text-center" ng-show="!currentSystem">
+	<i class="fa fa-cog fa-spin fa-fw"></i>
+	Waiting for system name...
+</h3>
+<div id="system-scanner" ng-show="currentSystem">
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>{{currentSystem}}</h3>
+		</div>
+		<div class="col-sm-6 text-right">
+			<h4>
+				{{estimatedTotal | number:0}} cr
+				<button class="btn btn-default btn-xs" ng-click="resetEstimatedTotal()">
+					<i class="fa fa-refresh" aria-hidden="true"></i>
+				</button>
+			</h4>
+		</div>
+	</div>
+	<p class="text-center" ng-show="loadingSystem">
+		<i class="fa fa-cog fa-spin fa-fw"></i> Waiting for info...
+	</p>
+	<div ng-hide="loadingSystem">
+		<dl class="dl-horizontal">
+			<dt>System Value: </dt>
+			<dd>{{system.total | number:0}} cr</dd>
+			<dt>Bodies To Scan: </dt>
+			<dd>{{system.bodies.length}}</dd>
+			<dt>Max Travel: </dt>
+			<dd>{{system.maxSystemTravel | number:0}} Ls</dd>
+		</dl>
+		<div class="row">
+			<div class="col-md-6">
+				<h4>Bodies To Scan</h4>
+				<table class="table table-sm table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="w-50">Body</th>
+							<th>Value</th>
+							<th>Ls</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-show="system.bodies.length === 0">
+							<td colspan="4">
+								<p class="text-center small">No Bodies To Scan</p>
+							</td>
+						</tr>
+						<tr ng-repeat="body in system.bodies | orderBy:'distance'">
+							<td>
+								<strong>{{body.shortname}}</strong><br>
+								{{body.type}} - {{body.subType}}
+							</td>
+							<td>{{body.value | number:0}} cr</td>
+							<td>{{body.distance | number:0}} Ls</td>
+							<td>
+								<button class="btn btn-info" ng-click="addBodyToScanned(body.name)">
+									<i class="fa fa-trash" aria-hidden="true"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<p class="text-center" ng-show="loadingBubble">
+					<i class="fa fa-cog fa-spin fa-fw"></i> Searching for systems...
+				</p>
+				<div ng-hide="loadingBubble">
+					<h4>Nearby Systems</h4>
+					<table class="table table-sm table-bordered table-striped" style="">
+						<thead>
+							<tr>
+								<th class="w-50">System</th>
+								<th>Value</th>
+								<th>Rating</th>
+								<th>Ly</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-show="bubble.length === 0">
+								<td colspan="4">
+									<p class="text-center small">Nothing in range or EDSM rate limit hit!</p>
+								</td>
+							</tr>
+							<tr ng-repeat="nearsystem in bubble">
+								<td>
+									<b>{{nearsystem.system}} <a ng-click="copyToClipboard(nearsystem.system)"><i class="fa fa-clipboard" aria-hidden="true"></i></a></b><br>
+									Bodies: {{nearsystem.bodyCount}}<br>
+									Max System Travel: {{nearsystem.maxSystemTravel | number:0}} Ls
+								</td>
+								<td>{{nearsystem.total | number:0}} cr</td>
+								<td>{{nearsystem.systemRating | number:0}}</td>
+								<td>{{nearsystem.distance}} ({{nearsystem.jumps}})</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<h3>Filters</h3>
+<form>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="jumprange">Jump Range: {{jumprange | number:0}}</label>
+				<slider ng-model="jumprange" min="1" step="1" max="100" value="jumprange" />
+				<p class="help-block">Your ships jump range.</p>
+			</div>			
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="maxdistance">Max Distance (Ls): {{maxdistance | number:0}}</label>
+				<slider ng-model="maxdistance" min="500" step="100" max="100000" value="maxdistance" />
+				<p class="help-block">The max distance a body can be from the main star.</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="minsystemvalue">Minimum System Value: {{minsystemvalue | number:0}}</label>
+				<slider ng-model="minsystemvalue" min="0" step="1000" max="500000" value="minsystemvalue" />
+				<p class="help-block">The minimum value of a system.</p>
+			</div>			
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="minbodyvalue">Minimum Body Value: {{minbodyvalue | number:0}}</label>
+				<slider ng-model="minbodyvalue" min="0" step="1000" max="250000" value="minbodyvalue" />
+				<p class="help-block">The minimum value of a body.</p>
+			</div>			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="maxbodies">Maximum Bodies Per System: {{maxbodies | number:0}}</label>
+				<slider ng-model="maxbodies" min="1" step="1" max="100" value="maxbodies" />
+				<p class="help-block">The maximum bodies in a system to scan.</p>
+			</div>		
+		</div>
+		<div class="col-sm-6">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="terraonly" ng-model="terraonly"> Terraformable - Only look for terraformable bodies only.
+				</label>
+			</div>		
+		</div>
+	</div>
+	<button class="btn btn-warning" ng-click="resetFilters()">Reset Filters</button>
+</form>
